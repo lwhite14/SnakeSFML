@@ -1,16 +1,10 @@
-ifeq ($(OS),Windows_NT)
-	OUTFILE = snake.exe
-	RM = del 
-else
-	OUTFILE = snake.out
-	RM = rm -f
-endif
+all: run
 
 build:
-	g++ -std=c++20 main.cpp -o $(OUTFILE) -lsfml-graphics -lsfml-window -lsfml-system
+	g++ -std=c++20 main.cpp -o snake.out -lsfml-graphics -lsfml-window -lsfml-system
 
 run: build
-	./$(OUTFILE)
+	./snake.out
 
 clean:
-	rm -f $(OUTFILE)
+	rm -f snake.out
