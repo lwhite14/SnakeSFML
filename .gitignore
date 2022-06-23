@@ -1,0 +1,6 @@
+# VSCode
+.vscode/*
+
+# Executable
+snake.exe
+snake.out
