@@ -1,24 +1,12 @@
-#include <SFML/Graphics.hpp>
+#include "source/runner.h"
+#include "source/scenes/scene.h"
+#include "source/scenes/basic_scene.h"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        window.clear();
-        window.draw(shape);
-        window.display();
-    }
-
-    return 0;
+	Runner runner{400, 400, "Snake"};
+	Scene* base{};
+	BasicScene derived{};
+	base = &derived;
+	return runner.Run(base);
 }
