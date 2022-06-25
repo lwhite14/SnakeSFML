@@ -9,39 +9,45 @@ class Runner
 {
 public:
 	Runner(int width, int height, const char* windowTitle) :
-		window(VideoMode(width, height), windowTitle),
-		shape(100.0f)
+
+		m_width(width),
+		m_height(height),
+		m_window(VideoMode(width, height), windowTitle)
 	{
-		shape.setFillColor(Color::Green);
-		shape.setPosition((width / 2) - 100.0f, (height / 2) - 100.0f);
+
 	}
 
 	int Run(Scene* scene) 
 	{
+		scene->SetDimensions(m_width, m_height);
+		scene->Init();
+
 		MainLoop(scene);
 		return 0;
 	}
 
 private:
-	RenderWindow window;
-	CircleShape shape;
+	int m_width, m_height;
+	RenderWindow m_window;
 
 	void MainLoop(Scene* scene) 
 	{
-		while (window.isOpen())
+		while (m_window.isOpen())
 		{
 			Event event;
-			while (window.pollEvent(event))
+			while (m_window.pollEvent(event))
 			{
 				if (event.type == Event::Closed) 
 				{
-					window.close();
+					m_window.close();
 				}
 			}
 
-			window.clear();
-			window.draw(shape);
-			window.display();
+			scene->Update();
+
+			m_window.clear();
+			scene->Render(m_window);
+			m_window.display();
 		}
 	}
 };
