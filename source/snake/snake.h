@@ -1,20 +1,23 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include "direction.h"
+#include "snake_part.h"
 
 using namespace sf;
+using namespace std;
 
 class Snake
 {
 private:
-	RectangleShape m_rectangle;
 	Direction m_direction;
 	const float m_MOVETIME;
-	int m_posX;
-	int m_posY;
 	float m_moveTime;
 	float m_speedUpAmount;
+
+	SnakePart m_head;
+	vector<SnakePart> m_body;
 
 	void Move();
 	void SwitchUp();
@@ -23,7 +26,7 @@ private:
 	void SwitchRight();
 public:
 	Snake(int posX, int posY);
-	void Update(Time deltaTime);
-	void Render(sf::RenderWindow& window);
+	void Update(const Time& deltaTime);
+	void Render(RenderWindow& window);
 	void Input(Event& event);
 };

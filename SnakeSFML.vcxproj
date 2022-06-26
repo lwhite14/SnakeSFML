@@ -142,14 +142,15 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="source\scenes\basic_scene.cpp" />
-    <ClCompile Include="source\snake.cpp" />
+    <ClCompile Include="source\snake\snake.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\direction.h" />
+    <ClInclude Include="source\snake\snake.h" />
+    <ClInclude Include="source\snake\direction.h" />
     <ClInclude Include="source\runner.h" />
     <ClInclude Include="source\scenes\basic_scene.h" />
     <ClInclude Include="source\scenes\scene.h" />
-    <ClInclude Include="source\snake.h" />
+    <ClInclude Include="source\snake\snake_part.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

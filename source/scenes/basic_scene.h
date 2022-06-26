@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "scene.h"
-#include "../snake.h"
+#include "../snake/snake.h"
 
 using namespace sf;
 
@@ -15,7 +15,6 @@ public:
 	BasicScene();
 	void Init();
 	void Update(const Time& deltaTime);
-	void Update();
 	void Render(sf::RenderWindow& window);
 	void Input(RenderWindow& window);
 };

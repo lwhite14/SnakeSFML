@@ -26,7 +26,7 @@
     <ClCompile Include="source\scenes\basic_scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\snake.cpp">
+    <ClCompile Include="source\snake\snake.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -40,10 +40,13 @@
     <ClInclude Include="source\scenes\basic_scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\snake.h">
+    <ClInclude Include="source\snake\direction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\direction.h">
+    <ClInclude Include="source\snake\snake_part.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\snake\snake.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

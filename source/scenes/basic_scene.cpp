@@ -1,12 +1,14 @@
 #include "basic_scene.h"
-#include "../snake.h"
 #include <iostream>
 
-BasicScene::BasicScene() { }
+BasicScene::BasicScene() : snake(new Snake(6, 5))
+{
+
+}
 
 void BasicScene::Init()
 {
-	snake = new Snake(0, 0);
+
 }
 
 void BasicScene::Update(const Time& deltaTime)
