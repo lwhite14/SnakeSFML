@@ -9,8 +9,9 @@ protected:
 
 public:
 	virtual void Init() = 0;
-	virtual void Update() = 0;
+	virtual void Update(const sf::Time& deltaTime) = 0;
 	virtual void Render(sf::RenderWindow& window) = 0;
+	virtual void Input(sf::RenderWindow& window) = 0;
 	void SetDimensions(int width, int height) 
 	{
 		m_width = width;

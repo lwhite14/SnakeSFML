@@ -142,11 +142,14 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="source\scenes\basic_scene.cpp" />
+    <ClCompile Include="source\snake.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\direction.h" />
     <ClInclude Include="source\runner.h" />
     <ClInclude Include="source\scenes\basic_scene.h" />
     <ClInclude Include="source\scenes\scene.h" />
+    <ClInclude Include="source\snake.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

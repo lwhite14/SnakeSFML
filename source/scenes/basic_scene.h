@@ -2,17 +2,20 @@
 
 #include <SFML/Graphics.hpp>
 #include "scene.h"
+#include "../snake.h"
 
 using namespace sf;
 
 class BasicScene : public Scene
 {
 private:
-	CircleShape m_circle;
+	Snake* snake;
 
 public:
 	BasicScene();
 	void Init();
+	void Update(const Time& deltaTime);
 	void Update();
 	void Render(sf::RenderWindow& window);
+	void Input(RenderWindow& window);
 };

@@ -32,18 +32,13 @@ private:
 
 	void MainLoop(Scene* scene) 
 	{
+		Clock clock;
 		while (m_window.isOpen())
 		{
-			Event event;
-			while (m_window.pollEvent(event))
-			{
-				if (event.type == Event::Closed) 
-				{
-					m_window.close();
-				}
-			}
+			Time elapsed = clock.restart();
 
-			scene->Update();
+			scene->Input(m_window);
+			scene->Update(elapsed);
 
 			m_window.clear();
 			scene->Render(m_window);

@@ -1,20 +1,41 @@
 #include "basic_scene.h"
+#include "../snake.h"
+#include <iostream>
 
 BasicScene::BasicScene() { }
 
 void BasicScene::Init()
 {
-	m_circle = CircleShape(100.0f);
-	m_circle.setFillColor(sf::Color::Green);
-	m_circle.setPosition((m_width / 2) - 100.0f, (m_height / 2) - 100.0f);
+	snake = new Snake(0, 0);
 }
 
-void BasicScene::Update()
+void BasicScene::Update(const Time& deltaTime)
 {
-
+	snake->Update(deltaTime);
 }
 
-void BasicScene::Render(sf::RenderWindow& window)
+void BasicScene::Render(RenderWindow& window)
 {
-	window.draw(m_circle);
+	snake->Render(window);
+}
+
+void BasicScene::Input(RenderWindow& window)
+{
+	Event event;
+	while (window.pollEvent(event))
+	{
+		if (event.type == Event::Closed)
+		{
+			window.close();
+		}
+		if (event.type == Event::KeyPressed)
+		{
+			if (event.key.code == Keyboard::Escape)
+			{
+				window.close();
+			}
+
+			snake->Input(event);
+		}
+	}
 }
