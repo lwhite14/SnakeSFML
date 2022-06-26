@@ -8,8 +8,10 @@ BasicScene::BasicScene() :
 
 }
 
-void BasicScene::Init()
+void BasicScene::Init(RenderWindow* window)
 {
+	m_window = window;
+
 	grub->Init();
 }
 
@@ -22,35 +24,45 @@ void BasicScene::Update(const Time& deltaTime)
 		vector<Vector2f> tempVector = snake->GetBodyPosition();
 		grub->NewPosition(tempVector);
 		snake->AddBody();
-		snake->AddBody();
-		snake->AddBody();
-		snake->AddBody();
+	}
+	if (snake->OffScreen()) 
+	{
+		GameOver();
+	}
+	if (snake->EatenTail()) 
+	{
+		GameOver();
 	}
 }
 
-void BasicScene::Render(RenderWindow& window)
+void BasicScene::Render()
 {
-	grub->Render(window);
-	snake->Render(window);
+	grub->Render(*m_window);
+	snake->Render(*m_window);
 }
 
-void BasicScene::Input(RenderWindow& window)
+void BasicScene::Input()
 {
 	Event event;
-	while (window.pollEvent(event))
+	while (m_window->pollEvent(event))
 	{
 		if (event.type == Event::Closed)
 		{
-			window.close();
+			m_window->close();
 		}
 		if (event.type == Event::KeyPressed)
 		{
 			if (event.key.code == Keyboard::Escape)
 			{
-				window.close();
+				m_window->close();
 			}
 
 			snake->Input(event);
 		}
 	}
+}
+
+void BasicScene::GameOver() 
+{
+	m_window->close();
 }

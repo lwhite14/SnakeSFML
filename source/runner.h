@@ -20,7 +20,7 @@ public:
 	int Run(Scene* scene) 
 	{
 		scene->SetDimensions(m_width, m_height);
-		scene->Init();
+		scene->Init(&m_window);
 
 		MainLoop(scene);
 		return 0;
@@ -37,11 +37,11 @@ private:
 		{
 			Time elapsed = clock.restart();
 
-			scene->Input(m_window);
+			scene->Input();
 			scene->Update(elapsed);
 
 			m_window.clear();
-			scene->Render(m_window);
+			scene->Render();
 			m_window.display();
 		}
 	}

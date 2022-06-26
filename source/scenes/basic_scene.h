@@ -13,10 +13,11 @@ private:
 	Snake* snake;
 	Grub* grub;
 
+	void GameOver();
 public:
 	BasicScene();
-	void Init();
+	void Init(RenderWindow* window);
 	void Update(const Time& deltaTime);
-	void Render(sf::RenderWindow& window);
-	void Input(RenderWindow& window);
+	void Render();
+	void Input();
 };

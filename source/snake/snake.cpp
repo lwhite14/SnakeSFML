@@ -61,6 +61,34 @@ void Snake::AddBody()
 	m_body.push_back(SnakePart(Vector2f(m_body[m_body.size() - 1].GetPosition().x, m_body[m_body.size() - 1].GetPosition().y), Color(0, 125, 0), RectangleShape(Vector2f(20.0f, 20.0f))));
 }
 
+bool Snake::OffScreen() 
+{
+	bool output = false;
+	Vector2f headPosition = GetHeadPosition();
+	if (headPosition.x > 19 || headPosition.x < 0 || headPosition.y > 19 || headPosition.y < 0) 
+	{
+		output = true;
+	}
+	return output;
+}
+
+bool Snake::EatenTail() 
+{
+	bool output = false;
+	vector<Vector2f> bodyPositions = GetBodyPosition();
+	Vector2f headPosition = GetHeadPosition();
+
+	for (unsigned int i = 0; i < bodyPositions.size(); i++) 
+	{
+		if (bodyPositions[i] == headPosition) 
+		{
+			output = true;
+		}
+	}
+
+	return output;
+}
+
 void Snake::Move() 
 {
 	vector<SnakePart> tempBody = m_body;

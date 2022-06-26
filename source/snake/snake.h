@@ -32,6 +32,9 @@ public:
 	void Input(Event& event);
 	void AddBody();
 
+	bool OffScreen();
+	bool EatenTail();
+
 	Vector2f GetHeadPosition();
 	vector<Vector2f> GetBodyPosition();
 };
