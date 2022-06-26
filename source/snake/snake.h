@@ -29,4 +29,6 @@ public:
 	void Update(const Time& deltaTime);
 	void Render(RenderWindow& window);
 	void Input(Event& event);
+	Vector2f GetHeadPosition();
+	vector<Vector2f> GetBodyPosition();
 };

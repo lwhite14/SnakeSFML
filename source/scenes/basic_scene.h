@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "scene.h"
 #include "../snake/snake.h"
+#include "../grub.h"
 
 using namespace sf;
 
@@ -10,6 +11,7 @@ class BasicScene : public Scene
 {
 private:
 	Snake* snake;
+	Grub* grub;
 
 public:
 	BasicScene();

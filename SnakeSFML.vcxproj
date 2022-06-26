@@ -141,10 +141,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="source\grub.cpp" />
     <ClCompile Include="source\scenes\basic_scene.cpp" />
     <ClCompile Include="source\snake\snake.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\grub.h" />
     <ClInclude Include="source\snake\snake.h" />
     <ClInclude Include="source\snake\direction.h" />
     <ClInclude Include="source\runner.h" />

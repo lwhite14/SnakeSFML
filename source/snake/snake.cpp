@@ -1,7 +1,7 @@
 #include "snake.h"
 #include <iostream>
 
-Snake::Snake(int posX, int posY) : m_MOVETIME(0.75f)
+Snake::Snake(int posX, int posY) : m_MOVETIME(0.55f)
 {
 	m_direction = {false, true, false, false};
 
@@ -135,4 +135,19 @@ void Snake::SwitchRight()
 		m_direction.left = false;
 		m_direction.right = true;
 	}
+}
+
+Vector2f Snake::GetHeadPosition() 
+{
+	return m_head.GetPosition();
+}
+
+vector<Vector2f> Snake::GetBodyPosition()
+{
+	vector<Vector2f> output;
+	for (unsigned int i = 0; i < m_body.size(); i++) 
+	{
+		output.push_back(m_body[i].GetPosition());
+	}
+	return output;
 }
