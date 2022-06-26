@@ -26,9 +26,12 @@ private:
 	void SwitchRight();
 public:
 	Snake(int posX, int posY);
+
 	void Update(const Time& deltaTime);
 	void Render(RenderWindow& window);
 	void Input(Event& event);
+	void AddBody();
+
 	Vector2f GetHeadPosition();
 	vector<Vector2f> GetBodyPosition();
 };

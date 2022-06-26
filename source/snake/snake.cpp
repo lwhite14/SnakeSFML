@@ -56,6 +56,11 @@ void Snake::Input(Event& event)
 	}
 }
 
+void Snake::AddBody() 
+{
+	m_body.push_back(SnakePart(Vector2f(m_body[m_body.size() - 1].GetPosition().x, m_body[m_body.size() - 1].GetPosition().y), Color(0, 125, 0), RectangleShape(Vector2f(20.0f, 20.0f))));
+}
+
 void Snake::Move() 
 {
 	vector<SnakePart> tempBody = m_body;

@@ -21,6 +21,10 @@ void BasicScene::Update(const Time& deltaTime)
 	{
 		vector<Vector2f> tempVector = snake->GetBodyPosition();
 		grub->NewPosition(tempVector);
+		snake->AddBody();
+		snake->AddBody();
+		snake->AddBody();
+		snake->AddBody();
 	}
 }
 
