@@ -1,11 +1,12 @@
 #include "snake.h"
 #include <iostream>
 
-Snake::Snake(int posX, int posY) : m_MOVETIME(0.55f)
+Snake::Snake(int posX, int posY)
 {
 	m_direction = {false, true, false, false};
 
-	m_moveTime = m_MOVETIME;
+	m_maxMoveTime = 0.55f;
+	m_moveTime = m_maxMoveTime;
 	m_speedUpAmount = 0.015f;
 
 	m_head = SnakePart(Vector2f(posX, posY), Color(0, 255, 0), RectangleShape(Vector2f(20.0f, 20.0f)));
@@ -23,7 +24,7 @@ void Snake::Update(const Time& deltaTime)
 	if (m_moveTime < 0) 
 	{
 		Move();
-		m_moveTime = m_MOVETIME;
+		m_moveTime = m_maxMoveTime;
 	}
 }
 
@@ -59,6 +60,11 @@ void Snake::Input(Event& event)
 void Snake::AddBody() 
 {
 	m_body.push_back(SnakePart(Vector2f(m_body[m_body.size() - 1].GetPosition().x, m_body[m_body.size() - 1].GetPosition().y), Color(0, 125, 0), RectangleShape(Vector2f(20.0f, 20.0f))));
+}
+
+void Snake::IncreaseSpeed() 
+{
+	m_maxMoveTime -= m_speedUpAmount;
 }
 
 bool Snake::OffScreen() 

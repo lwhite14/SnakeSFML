@@ -144,6 +144,7 @@
     <ClCompile Include="source\grub.cpp" />
     <ClCompile Include="source\scenes\basic_scene.cpp" />
     <ClCompile Include="source\snake\snake.cpp" />
+    <ClCompile Include="source\game_ui.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\grub.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="source\scenes\basic_scene.h" />
     <ClInclude Include="source\scenes\scene.h" />
     <ClInclude Include="source\snake\snake_part.h" />
+    <ClInclude Include="source\game_ui.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

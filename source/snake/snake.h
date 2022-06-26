@@ -12,7 +12,7 @@ class Snake
 {
 private:
 	Direction m_direction;
-	const float m_MOVETIME;
+	float m_maxMoveTime;
 	float m_moveTime;
 	float m_speedUpAmount;
 
@@ -31,6 +31,7 @@ public:
 	void Render(RenderWindow& window);
 	void Input(Event& event);
 	void AddBody();
+	void IncreaseSpeed();
 
 	bool OffScreen();
 	bool EatenTail();
