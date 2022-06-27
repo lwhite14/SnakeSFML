@@ -22,4 +22,5 @@ public:
 	void Update(const Time& deltaTime);
 	void Render();
 	void Input();
+	void RestartScene();
 };

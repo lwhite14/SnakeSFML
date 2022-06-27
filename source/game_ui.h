@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "scenes/scene.h"
 #include <iostream>
 #include <string>
 
@@ -20,6 +21,7 @@ public:
 	GameUI();
 	void Update();
 	void Render(RenderWindow& window);
+	void Input(Event& event, Scene* scene);
 	void IncreaseScore();
 	void SetGameOver(bool gameOver);
 };

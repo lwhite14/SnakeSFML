@@ -13,6 +13,7 @@ public:
 	virtual void Update(const sf::Time& deltaTime) = 0;
 	virtual void Render() = 0;
 	virtual void Input() = 0;
+	virtual void RestartScene() = 0;
 	void SetDimensions(int width, int height) 
 	{
 		m_width = width;

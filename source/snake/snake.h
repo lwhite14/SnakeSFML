@@ -16,6 +16,7 @@ private:
 	float m_maxMoveTime;
 	float m_moveTime;
 	float m_speedUpAmount;
+	bool m_isDead;
 
 	SnakePart m_head;
 	vector<SnakePart> m_body;
@@ -39,4 +40,6 @@ public:
 
 	Vector2f GetHeadPosition();
 	vector<Vector2f> GetBodyPosition();
+
+	void SetIsDead(bool isDead);
 };

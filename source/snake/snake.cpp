@@ -9,6 +9,7 @@ Snake::Snake(int posX, int posY)
 	m_maxMoveTime = 0.55f;
 	m_moveTime = m_maxMoveTime;
 	m_speedUpAmount = 0.95f;
+	m_isDead = false;
 
 	m_head = SnakePart(Vector2f(posX, posY), Color(0, 255, 0), RectangleShape(Vector2f(20.0f, 20.0f)));
 	m_body = vector<SnakePart>
@@ -21,21 +22,27 @@ Snake::Snake(int posX, int posY)
 
 void Snake::Update(const Time& deltaTime)
 {
-	m_moveTime -= deltaTime.asSeconds();
-	if (m_moveTime < 0) 
+	if (!m_isDead) 
 	{
-		Move();
-		m_moveTime = m_maxMoveTime;
-		m_prevDirection = m_direction;
+		m_moveTime -= deltaTime.asSeconds();
+		if (m_moveTime < 0)
+		{
+			Move();
+			m_moveTime = m_maxMoveTime;
+			m_prevDirection = m_direction;
+		}
 	}
 }
 
 void Snake::Render(sf::RenderWindow& window)
 {
-	m_head.Render(window);
-	for (unsigned int i = 0; i < m_body.size(); i++) 
+	if (!m_isDead)
 	{
-		m_body[i].Render(window);
+		m_head.Render(window);
+		for (unsigned int i = 0; i < m_body.size(); i++)
+		{
+			m_body[i].Render(window);
+		}
 	}
 }
 
@@ -191,4 +198,9 @@ vector<Vector2f> Snake::GetBodyPosition()
 		output.push_back(m_body[i].GetPosition());
 	}
 	return output;
+}
+
+void Snake::SetIsDead(bool isDead) 
+{
+	m_isDead = isDead;
 }
