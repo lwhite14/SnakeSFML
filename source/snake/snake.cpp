@@ -4,10 +4,11 @@
 Snake::Snake(int posX, int posY)
 {
 	m_direction = {false, true, false, false};
+	m_prevDirection = {false, true, false, false};
 
 	m_maxMoveTime = 0.55f;
 	m_moveTime = m_maxMoveTime;
-	m_speedUpAmount = 0.015f;
+	m_speedUpAmount = 0.95f;
 
 	m_head = SnakePart(Vector2f(posX, posY), Color(0, 255, 0), RectangleShape(Vector2f(20.0f, 20.0f)));
 	m_body = vector<SnakePart>
@@ -25,6 +26,7 @@ void Snake::Update(const Time& deltaTime)
 	{
 		Move();
 		m_moveTime = m_maxMoveTime;
+		m_prevDirection = m_direction;
 	}
 }
 
@@ -64,7 +66,7 @@ void Snake::AddBody()
 
 void Snake::IncreaseSpeed() 
 {
-	m_maxMoveTime -= m_speedUpAmount;
+	m_maxMoveTime *= m_speedUpAmount;
 }
 
 bool Snake::OffScreen() 
@@ -134,7 +136,7 @@ void Snake::Move()
 
 void Snake::SwitchUp() 
 {
-	if (!m_direction.down) 
+	if (!m_prevDirection.down)
 	{
 		m_direction.up = true;
 		m_direction.down = false;
@@ -145,7 +147,7 @@ void Snake::SwitchUp()
 
 void Snake::SwitchDown()
 {
-	if (!m_direction.up)
+	if (!m_prevDirection.up)
 	{
 		m_direction.up = false;
 		m_direction.down = true;
@@ -156,7 +158,7 @@ void Snake::SwitchDown()
 
 void Snake::SwitchLeft()
 {
-	if (!m_direction.right)
+	if (!m_prevDirection.right)
 	{
 		m_direction.up = false;
 		m_direction.down = false;
@@ -167,7 +169,7 @@ void Snake::SwitchLeft()
 
 void Snake::SwitchRight()
 {
-	if (!m_direction.left)
+	if (!m_prevDirection.left)
 	{
 		m_direction.up = false;
 		m_direction.down = false;

@@ -12,6 +12,7 @@ class Snake
 {
 private:
 	Direction m_direction;
+	Direction m_prevDirection;
 	float m_maxMoveTime;
 	float m_moveTime;
 	float m_speedUpAmount;
