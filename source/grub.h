@@ -15,7 +15,6 @@ private:
 public:
 	Grub();
 	Grub(Vector2f position, Color color, RectangleShape rectangle);
-	void Init();
 	void Update(const Time& deltaTime);
 	void Render(RenderWindow& window);
 	void SetPosition(Vector2f newPosition);

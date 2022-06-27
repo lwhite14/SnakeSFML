@@ -16,9 +16,14 @@ GameUI::GameUI()
 
 
 	m_scoreText.setString("Score 0");
-	m_scoreText.setCharacterSize(24); // in pixels, not points!
+	m_scoreText.setCharacterSize(24);
 	m_scoreText.setFillColor(Color(255, 255, 255));
-	m_scoreText.setStyle(Text::Bold);
+	m_scoreText.setPosition(150, 0);
+
+	m_gameOverText.setString("Game Over");
+	m_gameOverText.setCharacterSize(24);
+	m_gameOverText.setFillColor(Color(255, 0, 0));
+	m_gameOverText.setPosition(130, 190);
 }
 
 void GameUI::Update()

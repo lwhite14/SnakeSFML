@@ -9,14 +9,12 @@ Grub::Grub(Vector2f position, Color color, RectangleShape rectangle)
 	m_position = position;
 	m_color = color;
 	m_rectangle = rectangle;
-}
 
-void Grub::Init()
-{
 	m_rectangle = RectangleShape(Vector2f(20.0f, 20.0f));
 	m_rectangle.setFillColor(m_color);
 	m_rectangle.setPosition(m_position.x, m_position.y);
 }
+
 
 void Grub::Update(const Time& deltaTime)
 {

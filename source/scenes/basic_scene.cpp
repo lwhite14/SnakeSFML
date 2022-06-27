@@ -12,8 +12,6 @@ BasicScene::BasicScene() :
 void BasicScene::Init(RenderWindow* window)
 {
 	m_window = window;
-
-	grub->Init();
 }
 
 void BasicScene::Update(const Time& deltaTime)
@@ -69,5 +67,6 @@ void BasicScene::Input()
 
 void BasicScene::GameOver() 
 {
-	m_window->close();
+	//m_window->close();
+	gameUI->SetGameOver(true);
 }
