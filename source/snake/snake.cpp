@@ -11,12 +11,12 @@ Snake::Snake(int posX, int posY)
 	m_speedUpAmount = 0.95f;
 	m_isDead = false;
 
-	m_head = SnakePart(Vector2f(posX, posY), Color(0, 255, 0), RectangleShape(Vector2f(20.0f, 20.0f)));
+	m_head = SnakePart(Vector2f(posX, posY), Color(0, 255, 0), RectangleShape(Vector2f(20.0f, 20.0f)), 1.0f);
 	m_body = vector<SnakePart>
 	{
-		SnakePart(Vector2f(posX, posY - 1), Color(0, 125, 0), RectangleShape(Vector2f(20.0f, 20.0f))),
-		SnakePart(Vector2f(posX, posY - 2), Color(0, 125, 0), RectangleShape(Vector2f(20.0f, 20.0f))),
-		SnakePart(Vector2f(posX, posY - 3), Color(0, 125, 0), RectangleShape(Vector2f(20.0f, 20.0f)))
+		SnakePart(Vector2f(posX, posY - 1), Color(0, 125, 0), RectangleShape(Vector2f(20.0f, 20.0f)), 2.0f),
+		SnakePart(Vector2f(posX, posY - 2), Color(0, 125, 0), RectangleShape(Vector2f(20.0f, 20.0f)), 2.0f),
+		SnakePart(Vector2f(posX, posY - 3), Color(0, 125, 0), RectangleShape(Vector2f(20.0f, 20.0f)), 2.0f)
 	};
 }
 
@@ -68,7 +68,7 @@ void Snake::Input(Event& event)
 
 void Snake::AddBody() 
 {
-	m_body.push_back(SnakePart(Vector2f(m_body[m_body.size() - 1].GetPosition().x, m_body[m_body.size() - 1].GetPosition().y), Color(0, 125, 0), RectangleShape(Vector2f(20.0f, 20.0f))));
+	m_body.push_back(SnakePart(Vector2f(m_body[m_body.size() - 1].GetPosition().x, m_body[m_body.size() - 1].GetPosition().y), Color(0, 125, 0), RectangleShape(Vector2f(20.0f, 20.0f)), 2.0f));
 }
 
 void Snake::IncreaseSpeed() 
