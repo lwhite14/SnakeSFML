@@ -1,18 +1,21 @@
 #include "grub.h"
 #include <stdlib.h>
 #include <time.h>
+#include <iostream>
 
 Grub::Grub() { }
 
-Grub::Grub(Vector2f position, Color color, RectangleShape rectangle)
+Grub::Grub(Vector2f position, Color color, const char* textureFile)
 {
 	m_position = position;
 	m_color = color;
-	m_rectangle = rectangle;
 
-	m_rectangle = RectangleShape(Vector2f(20.0f, 20.0f));
-	m_rectangle.setFillColor(m_color);
-	m_rectangle.setPosition(m_position.x, m_position.y);
+	if (!m_texture.loadFromFile(textureFile))
+	{
+		std::cout << "ERROR LOADING TEXTURE" << std::endl;
+	}
+	m_sprite.setTexture(m_texture);
+	m_sprite.setScale(Vector2f(0.3125f, 0.3125f));
 }
 
 
@@ -26,8 +29,9 @@ void Grub::Render(RenderWindow& window)
 	float trueX, trueY;
 	trueX = m_position.x * 20;
 	trueY = m_position.y * 20;
-	m_rectangle.setPosition(trueX, trueY);
-	window.draw(m_rectangle);
+	
+	m_sprite.setPosition(trueX, trueY);
+	window.draw(m_sprite);
 }
 
 void Grub::SetPosition(Vector2f newPosition)

@@ -3,7 +3,7 @@
 
 BasicScene::BasicScene() : 
 		snake(new Snake(6, 5)), 
-		grub(new Grub(Vector2f(10, 10), Color(255, 255, 0), RectangleShape(Vector2f(20.0f, 20.0f)))),
+		grub(new Grub(Vector2f(10, 10), Color(255, 255, 0), "media/textures/grub.png")),
 		gameUI(new GameUI())
 {
 
@@ -72,6 +72,6 @@ void BasicScene::GameOver()
 void BasicScene::RestartScene()
 {
 	snake = new Snake(6, 5);
-	grub = new Grub(Vector2f(10, 10), Color(255, 255, 0), RectangleShape(Vector2f(20.0f, 20.0f)));
+	grub = new Grub(Vector2f(10, 10), Color(255, 255, 0), "media/textures/grub.png");
 	gameUI = new GameUI();
 }
