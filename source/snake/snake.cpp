@@ -11,12 +11,22 @@ Snake::Snake(int posX, int posY)
 	m_speedUpAmount = 0.98f;
 	m_isDead = false;
 
-	m_head = SnakePart(Vector2f(posX, posY), Color(0, 255, 0), RectangleShape(Vector2f(20.0f, 20.0f)));
+	// Head Up
+	m_headUpTexture.loadFromFile("media/textures/snake-head-up.png");
+	m_headUpSprite.setTexture(m_headUpTexture);
+	m_headUpSprite.setScale(Vector2f(0.3125f, 0.3125f));
+
+	//Body Straight Up Down
+	m_bodyUpDownTexture.loadFromFile("media/textures/snake-body-topbottom.png");
+	m_bodyUpDownSprite.setTexture(m_bodyUpDownTexture);
+	m_bodyUpDownSprite.setScale(Vector2f(0.3125f, 0.3125f));
+
+	m_head = SnakePart(Vector2f(posX, posY), m_headUpSprite);
 	m_body = vector<SnakePart>
 	{
-		SnakePart(Vector2f(posX, posY - 1), Color(0, 125, 0), RectangleShape(Vector2f(20.0f, 20.0f))),
-		SnakePart(Vector2f(posX, posY - 2), Color(0, 125, 0), RectangleShape(Vector2f(20.0f, 20.0f))),
-		SnakePart(Vector2f(posX, posY - 3), Color(0, 125, 0), RectangleShape(Vector2f(20.0f, 20.0f)))
+		SnakePart(Vector2f(posX, posY - 1), m_bodyUpDownSprite),
+		SnakePart(Vector2f(posX, posY - 2), m_bodyUpDownSprite),
+		SnakePart(Vector2f(posX, posY - 3), m_bodyUpDownSprite)
 	};
 }
 
@@ -68,7 +78,7 @@ void Snake::Input(Event& event)
 
 void Snake::AddBody() 
 {
-	m_body.push_back(SnakePart(Vector2f(m_body[m_body.size() - 1].GetPosition().x, m_body[m_body.size() - 1].GetPosition().y), Color(0, 125, 0), RectangleShape(Vector2f(20.0f, 20.0f))));
+	m_body.push_back(SnakePart(Vector2f(m_body[m_body.size() - 1].GetPosition().x, m_body[m_body.size() - 1].GetPosition().y), m_bodyUpDownSprite));
 }
 
 void Snake::IncreaseSpeed() 

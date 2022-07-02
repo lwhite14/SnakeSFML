@@ -1,31 +1,23 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "direction.h"
 
 using namespace sf;
 
 class SnakePart
 {
 private:
-	Color m_color;
-	RectangleShape m_rectangle;
 	Vector2f m_position;
-	float m_margin;
+	Sprite m_sprite;
 
 public:
 	SnakePart() { }
 
-	SnakePart(Vector2f position, Color color, RectangleShape rectangle, float margin = 0.0f)
+	SnakePart(Vector2f position, Sprite sprite)
 	{
 		m_position = position;
-		m_color = color;
-		m_rectangle = rectangle;
-		m_rectangle.setSize(Vector2f(m_rectangle.getSize().x - (margin * 2), m_rectangle.getSize().y - (margin * 2)));
-
-		m_rectangle.setFillColor(m_color);
-		m_rectangle.setPosition(m_position.x, m_position.y);
-
-		m_margin = margin;
+		SetSprite(sprite);
 	}
 
 	void Render(RenderWindow& window) 
@@ -33,10 +25,8 @@ public:
 		float trueX, trueY;
 		trueX = m_position.x * 20;
 		trueY = m_position.y * 20;
-		trueX += m_margin;
-		trueY += m_margin;
-		m_rectangle.setPosition(trueX, trueY);
-		window.draw(m_rectangle);
+		m_sprite.setPosition(trueX, trueY);
+		window.draw(m_sprite);
 	}
 
 	void Move(Vector2f toAdd) 
@@ -52,5 +42,16 @@ public:
 	Vector2f GetPosition() 
 	{
 		return m_position;
+	}
+
+	void SetSprite(Sprite sprite) 
+	{
+		m_sprite = sprite;
+		m_sprite.setScale(Vector2f(0.3125f, 0.3125f));
+	}
+
+	Sprite GetSprite()
+	{
+		return m_sprite;
 	}
 };

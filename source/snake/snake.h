@@ -18,6 +18,12 @@ private:
 	float m_speedUpAmount;
 	bool m_isDead;
 
+	Texture m_headUpTexture;
+	Sprite m_headUpSprite;
+
+	Texture m_bodyUpDownTexture;
+	Sprite m_bodyUpDownSprite;
+
 	SnakePart m_head;
 	vector<SnakePart> m_body;
 
