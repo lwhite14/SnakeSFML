@@ -70,13 +70,15 @@ Snake::Snake(int posX, int posY)
 	m_sprites[13].setTexture(m_textures[13]);
 	m_sprites[13].setScale(Vector2f(0.3125f, 0.3125f));
 
-	m_head = SnakePart(Vector2f(posX, posY), m_sprites[0]);
+	m_head = SnakePart(Vector2f(posX, posY), m_sprites[0], nullptr, new Direction{ false, true, false, false });
 	m_body = vector<SnakePart>
 	{
-		SnakePart(Vector2f(posX, posY - 1), m_sprites[1]),
-		SnakePart(Vector2f(posX, posY - 2), m_sprites[1]),
-		SnakePart(Vector2f(posX, posY - 3), m_sprites[1])
+		SnakePart(Vector2f(posX, posY - 1), m_sprites[1], new Direction{ false, true, false, false }, new Direction{ false, true, false, false }),
+		SnakePart(Vector2f(posX, posY - 2), m_sprites[1], new Direction{ false, true, false, false }, new Direction{ false, true, false, false }),
+		SnakePart(Vector2f(posX, posY - 3), m_sprites[1], new Direction{ false, true, false, false }, nullptr)
 	};
+
+	UpdateSprites();
 }
 
 void Snake::Update(const Time& deltaTime)
@@ -247,10 +249,34 @@ void Snake::SwitchRight()
 
 void Snake::UpdateSprites() 
 {
+	if (m_prevDirection.up) { m_head.SetBehindDirection(new Direction{ false, true, false, false }); }
+	if (m_prevDirection.down) { m_head.SetBehindDirection(new Direction{ true, false, false, false }); }
+	if (m_prevDirection.left) { m_head.SetBehindDirection(new Direction{ false, false, false, true }); }
+	if (m_prevDirection.right) { m_head.SetBehindDirection(new Direction{ false, false, true, false }); }
+
+
+	if (m_head.GetBehindDirection().up) 
+	{
+		m_head.SetSprite(m_sprites[6]);
+	}	
+	if (m_head.GetBehindDirection().down)
+	{
+		m_head.SetSprite(m_sprites[9]);
+	}	
+	if (m_head.GetBehindDirection().left)
+	{
+		m_head.SetSprite(m_sprites[8]);
+	}	
+	if (m_head.GetBehindDirection().right)
+	{
+		m_head.SetSprite(m_sprites[7]);
+	}
+
+
+	for (unsigned int i = 0; i < m_body.size(); i++)
+	{
 	
-
-
-
+	}
 }
 
 Vector2f Snake::GetHeadPosition() 
