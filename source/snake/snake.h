@@ -18,11 +18,8 @@ private:
 	float m_speedUpAmount;
 	bool m_isDead;
 
-	Texture m_headUpTexture;
-	Sprite m_headUpSprite;
-
-	Texture m_bodyUpDownTexture;
-	Sprite m_bodyUpDownSprite;
+	vector<Texture> m_textures;
+	vector<Sprite> m_sprites;
 
 	SnakePart m_head;
 	vector<SnakePart> m_body;
@@ -32,6 +29,7 @@ private:
 	void SwitchDown();
 	void SwitchLeft();
 	void SwitchRight();
+	void UpdateSprites();
 public:
 	Snake(int posX, int posY);
 

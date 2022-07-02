@@ -10,6 +10,8 @@ class SnakePart
 private:
 	Vector2f m_position;
 	Sprite m_sprite;
+	Direction* m_infrontDirection;
+	Direction* m_behindDirection;
 
 public:
 	SnakePart() { }
@@ -18,6 +20,9 @@ public:
 	{
 		m_position = position;
 		SetSprite(sprite);
+
+		m_infrontDirection = nullptr;
+		m_behindDirection = nullptr;
 	}
 
 	void Render(RenderWindow& window) 
@@ -53,5 +58,25 @@ public:
 	Sprite GetSprite()
 	{
 		return m_sprite;
+	}
+
+	void SetBehindDirection(Direction& direction) 
+	{
+		m_behindDirection = &direction;
+	}
+
+	Direction GetBehindDirection() 
+	{
+		return *m_behindDirection;
+	}
+
+	void SetInfrontDirection(Direction& direction)
+	{
+		m_infrontDirection = &direction;
+	}
+
+	Direction GetInfrontDirection()
+	{
+		return *m_infrontDirection;
 	}
 };

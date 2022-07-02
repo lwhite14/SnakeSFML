@@ -11,22 +11,71 @@ Snake::Snake(int posX, int posY)
 	m_speedUpAmount = 0.98f;
 	m_isDead = false;
 
-	// Head Up
-	m_headUpTexture.loadFromFile("media/textures/snake-head-up.png");
-	m_headUpSprite.setTexture(m_headUpTexture);
-	m_headUpSprite.setScale(Vector2f(0.3125f, 0.3125f));
+	m_textures = vector<Texture>(14);
+	m_sprites = vector<Sprite>(14);
 
-	//Body Straight Up Down
-	m_bodyUpDownTexture.loadFromFile("media/textures/snake-body-topbottom.png");
-	m_bodyUpDownSprite.setTexture(m_bodyUpDownTexture);
-	m_bodyUpDownSprite.setScale(Vector2f(0.3125f, 0.3125f));
+	m_textures[0].loadFromFile("media/textures/snake-body-bottomright.png");
+	m_sprites[0].setTexture(m_textures[0]);
+	m_sprites[0].setScale(Vector2f(0.3125f, 0.3125f));
 
-	m_head = SnakePart(Vector2f(posX, posY), m_headUpSprite);
+	m_textures[1].loadFromFile("media/textures/snake-body-leftbottom.png");
+	m_sprites[1].setTexture(m_textures[1]);
+	m_sprites[1].setScale(Vector2f(0.3125f, 0.3125f));
+
+	m_textures[2].loadFromFile("media/textures/snake-body-leftright.png");
+	m_sprites[2].setTexture(m_textures[2]);
+	m_sprites[2].setScale(Vector2f(0.3125f, 0.3125f));
+
+	m_textures[3].loadFromFile("media/textures/snake-body-topbottom.png");
+	m_sprites[3].setTexture(m_textures[3]);
+	m_sprites[3].setScale(Vector2f(0.3125f, 0.3125f));
+
+	m_textures[4].loadFromFile("media/textures/snake-body-topleft.png");
+	m_sprites[4].setTexture(m_textures[4]);
+	m_sprites[4].setScale(Vector2f(0.3125f, 0.3125f));
+
+	m_textures[5].loadFromFile("media/textures/snake-body-topright.png");
+	m_sprites[5].setTexture(m_textures[5]);
+	m_sprites[5].setScale(Vector2f(0.3125f, 0.3125f));
+
+	m_textures[6].loadFromFile("media/textures/snake-head-down.png");
+	m_sprites[6].setTexture(m_textures[6]);
+	m_sprites[6].setScale(Vector2f(0.3125f, 0.3125f));
+
+	m_textures[7].loadFromFile("media/textures/snake-head-left.png");
+	m_sprites[7].setTexture(m_textures[7]);
+	m_sprites[7].setScale(Vector2f(0.3125f, 0.3125f));
+
+	m_textures[8].loadFromFile("media/textures/snake-head-right.png");
+	m_sprites[8].setTexture(m_textures[8]);
+	m_sprites[8].setScale(Vector2f(0.3125f, 0.3125f));
+
+	m_textures[9].loadFromFile("media/textures/snake-head-up.png");
+	m_sprites[9].setTexture(m_textures[9]);
+	m_sprites[9].setScale(Vector2f(0.3125f, 0.3125f));
+
+	m_textures[10].loadFromFile("media/textures/snake-tail-down.png");
+	m_sprites[10].setTexture(m_textures[10]);
+	m_sprites[10].setScale(Vector2f(0.3125f, 0.3125f));
+
+	m_textures[11].loadFromFile("media/textures/snake-tail-left.png");
+	m_sprites[11].setTexture(m_textures[11]);
+	m_sprites[11].setScale(Vector2f(0.3125f, 0.3125f));
+
+	m_textures[12].loadFromFile("media/textures/snake-tail-right.png");
+	m_sprites[12].setTexture(m_textures[12]);
+	m_sprites[12].setScale(Vector2f(0.3125f, 0.3125f));
+
+	m_textures[13].loadFromFile("media/textures/snake-tail-up.png");
+	m_sprites[13].setTexture(m_textures[13]);
+	m_sprites[13].setScale(Vector2f(0.3125f, 0.3125f));
+
+	m_head = SnakePart(Vector2f(posX, posY), m_sprites[0]);
 	m_body = vector<SnakePart>
 	{
-		SnakePart(Vector2f(posX, posY - 1), m_bodyUpDownSprite),
-		SnakePart(Vector2f(posX, posY - 2), m_bodyUpDownSprite),
-		SnakePart(Vector2f(posX, posY - 3), m_bodyUpDownSprite)
+		SnakePart(Vector2f(posX, posY - 1), m_sprites[1]),
+		SnakePart(Vector2f(posX, posY - 2), m_sprites[1]),
+		SnakePart(Vector2f(posX, posY - 3), m_sprites[1])
 	};
 }
 
@@ -40,6 +89,7 @@ void Snake::Update(const Time& deltaTime)
 			Move();
 			m_moveTime = m_maxMoveTime;
 			m_prevDirection = m_direction;
+			UpdateSprites();
 		}
 	}
 }
@@ -78,7 +128,7 @@ void Snake::Input(Event& event)
 
 void Snake::AddBody() 
 {
-	m_body.push_back(SnakePart(Vector2f(m_body[m_body.size() - 1].GetPosition().x, m_body[m_body.size() - 1].GetPosition().y), m_bodyUpDownSprite));
+	m_body.push_back(SnakePart(Vector2f(m_body[m_body.size() - 1].GetPosition().x, m_body[m_body.size() - 1].GetPosition().y), m_sprites[1]));
 }
 
 void Snake::IncreaseSpeed() 
@@ -193,6 +243,14 @@ void Snake::SwitchRight()
 		m_direction.left = false;
 		m_direction.right = true;
 	}
+}
+
+void Snake::UpdateSprites() 
+{
+	
+
+
+
 }
 
 Vector2f Snake::GetHeadPosition() 
