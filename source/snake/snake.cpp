@@ -130,7 +130,7 @@ void Snake::Input(Event& event)
 
 void Snake::AddBody() 
 {
-	m_body.push_back(SnakePart(Vector2f(m_body[m_body.size() - 1].GetPosition().x, m_body[m_body.size() - 1].GetPosition().y), m_sprites[1]));
+	m_body.push_back(SnakePart(Vector2f(m_body[m_body.size() - 1].GetPosition().x, m_body[m_body.size() - 1].GetPosition().y), m_body[m_body.size() - 1].GetSprite()));
 }
 
 void Snake::IncreaseSpeed() 
@@ -182,8 +182,18 @@ void Snake::Move()
 		else
 		{
 			tempBody[i].SetPosition(m_body[i - 1].GetPosition());
-			tempBody[i].SetInfrontDirection(new Direction{ m_body[i - 1].GetInfrontDirection().up, m_body[i - 1].GetInfrontDirection().down, m_body[i - 1].GetInfrontDirection().left, m_body[i - 1].GetInfrontDirection().right});
-			tempBody[i].SetBehindDirection(new Direction{ m_body[i - 1].GetBehindDirection().up, m_body[i - 1].GetBehindDirection().down, m_body[i - 1].GetBehindDirection().left, m_body[i - 1].GetBehindDirection().right});
+
+			tempBody[i].SetInfrontDirection(new Direction{ m_body[i - 1].GetInfrontDirection().up, m_body[i - 1].GetInfrontDirection().down, m_body[i - 1].GetInfrontDirection().left, m_body[i - 1].GetInfrontDirection().right });
+			
+			
+			if (i == m_body.size() - 1) 
+			{
+				tempBody[i].SetBehindDirection(nullptr);
+			}
+			else 
+			{
+				tempBody[i].SetBehindDirection(new Direction{ m_body[i - 1].GetBehindDirection().up, m_body[i - 1].GetBehindDirection().down, m_body[i - 1].GetBehindDirection().left, m_body[i - 1].GetBehindDirection().right });
+			}
 		}
 	}
 	m_body = tempBody;
