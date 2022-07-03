@@ -70,6 +70,11 @@ public:
 		return *m_behindDirection;
 	}
 
+	Direction* GetBehindDirectionPtr() 
+	{
+		return m_behindDirection;
+	}
+
 	void SetInfrontDirection(Direction* direction)
 	{
 		m_infrontDirection = direction;

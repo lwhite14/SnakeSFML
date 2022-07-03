@@ -70,11 +70,11 @@ Snake::Snake(int posX, int posY)
 	m_sprites[13].setTexture(m_textures[13]);
 	m_sprites[13].setScale(Vector2f(0.3125f, 0.3125f));
 
-	m_head = SnakePart(Vector2f(posX, posY), m_sprites[0], nullptr, new Direction{ false, true, false, false });
+	m_head = SnakePart(Vector2f(posX, posY), m_sprites[0], nullptr, new Direction{ true, false, false, false });
 	m_body = vector<SnakePart>
 	{
-		SnakePart(Vector2f(posX, posY - 1), m_sprites[1], new Direction{ false, true, false, false }, new Direction{ false, true, false, false }),
-		SnakePart(Vector2f(posX, posY - 2), m_sprites[1], new Direction{ false, true, false, false }, new Direction{ false, true, false, false }),
+		SnakePart(Vector2f(posX, posY - 1), m_sprites[1], new Direction{ false, true, false, false }, new Direction{ true, false, false, false }),
+		SnakePart(Vector2f(posX, posY - 2), m_sprites[1], new Direction{ false, true, false, false }, new Direction{ true, false, false, false }),
 		SnakePart(Vector2f(posX, posY - 3), m_sprites[1], new Direction{ false, true, false, false }, nullptr)
 	};
 
@@ -88,9 +88,9 @@ void Snake::Update(const Time& deltaTime)
 		m_moveTime -= deltaTime.asSeconds();
 		if (m_moveTime < 0)
 		{
-			Move();
 			m_moveTime = m_maxMoveTime;
-			m_prevDirection = m_direction;
+
+			Move();
 			UpdateSprites();
 		}
 	}
@@ -168,16 +168,22 @@ bool Snake::EatenTail()
 
 void Snake::Move() 
 {
+	m_prevDirection = m_direction;
+
 	vector<SnakePart> tempBody = m_body;
 	for (unsigned int i = 0; i < m_body.size(); i++)
 	{
 		if (i == 0)
 		{
 			tempBody[i].SetPosition(m_head.GetPosition());
+			tempBody[i].SetInfrontDirection(new Direction{m_direction.up, m_direction.down, m_direction.left, m_direction.right});
+			tempBody[i].SetBehindDirection(new Direction{m_head.GetBehindDirection().up, m_head.GetBehindDirection().down, m_head.GetBehindDirection().left, m_head.GetBehindDirection().right});
 		}
 		else
 		{
 			tempBody[i].SetPosition(m_body[i - 1].GetPosition());
+			tempBody[i].SetInfrontDirection(new Direction{ m_body[i - 1].GetInfrontDirection().up, m_body[i - 1].GetInfrontDirection().down, m_body[i - 1].GetInfrontDirection().left, m_body[i - 1].GetInfrontDirection().right});
+			tempBody[i].SetBehindDirection(new Direction{ m_body[i - 1].GetBehindDirection().up, m_body[i - 1].GetBehindDirection().down, m_body[i - 1].GetBehindDirection().left, m_body[i - 1].GetBehindDirection().right});
 		}
 	}
 	m_body = tempBody;
@@ -201,6 +207,10 @@ void Snake::Move()
 		toAdd.x = 1;
 	}
 	m_head.Move(toAdd);
+	if (m_prevDirection.up) { m_head.SetBehindDirection(new Direction{ false, true, false, false }); }
+	if (m_prevDirection.down) { m_head.SetBehindDirection(new Direction{ true, false, false, false }); }
+	if (m_prevDirection.left) { m_head.SetBehindDirection(new Direction{ false, false, false, true }); }
+	if (m_prevDirection.right) { m_head.SetBehindDirection(new Direction{ false, false, true, false }); }
 }
 
 void Snake::SwitchUp() 
@@ -249,12 +259,6 @@ void Snake::SwitchRight()
 
 void Snake::UpdateSprites() 
 {
-	if (m_prevDirection.up) { m_head.SetBehindDirection(new Direction{ false, true, false, false }); }
-	if (m_prevDirection.down) { m_head.SetBehindDirection(new Direction{ true, false, false, false }); }
-	if (m_prevDirection.left) { m_head.SetBehindDirection(new Direction{ false, false, false, true }); }
-	if (m_prevDirection.right) { m_head.SetBehindDirection(new Direction{ false, false, true, false }); }
-
-
 	if (m_head.GetBehindDirection().up) 
 	{
 		m_head.SetSprite(m_sprites[6]);
@@ -275,7 +279,58 @@ void Snake::UpdateSprites()
 
 	for (unsigned int i = 0; i < m_body.size(); i++)
 	{
-	
+		if (m_body[i].GetInfrontDirection().up) 
+		{
+			if (m_body[i].GetBehindDirectionPtr() != nullptr) 
+			{
+				if (m_body[i].GetBehindDirection().down) { m_body[i].SetSprite(m_sprites[3]); }
+				if (m_body[i].GetBehindDirection().left) { m_body[i].SetSprite(m_sprites[4]); }
+				if (m_body[i].GetBehindDirection().right) { m_body[i].SetSprite(m_sprites[5]); }
+			}
+			else 
+			{
+				m_body[i].SetSprite(m_sprites[10]);
+			}
+		}
+		if (m_body[i].GetInfrontDirection().down) 
+		{ 
+			if (m_body[i].GetBehindDirectionPtr() != nullptr) 
+			{
+				if (m_body[i].GetBehindDirection().up) { m_body[i].SetSprite(m_sprites[3]); }
+				if (m_body[i].GetBehindDirection().left) { m_body[i].SetSprite(m_sprites[1]); }
+				if (m_body[i].GetBehindDirection().right) { m_body[i].SetSprite(m_sprites[0]); }
+			}
+			else
+			{
+				m_body[i].SetSprite(m_sprites[13]);
+			}
+		}
+		if (m_body[i].GetInfrontDirection().left) 
+		{
+			if (m_body[i].GetBehindDirectionPtr() != nullptr) 
+			{
+				if (m_body[i].GetBehindDirection().up) { m_body[i].SetSprite(m_sprites[4]); }
+				if (m_body[i].GetBehindDirection().down) { m_body[i].SetSprite(m_sprites[1]); }
+				if (m_body[i].GetBehindDirection().right) { m_body[i].SetSprite(m_sprites[2]); }
+			}
+			else
+			{
+				m_body[i].SetSprite(m_sprites[12]);
+			}
+		}
+		if (m_body[i].GetInfrontDirection().right) 
+		{
+			if (m_body[i].GetBehindDirectionPtr() != nullptr) 
+			{
+				if (m_body[i].GetBehindDirection().up) { m_body[i].SetSprite(m_sprites[5]); }
+				if (m_body[i].GetBehindDirection().down) { m_body[i].SetSprite(m_sprites[0]); }
+				if (m_body[i].GetBehindDirection().left) { m_body[i].SetSprite(m_sprites[2]); }
+			}
+			else
+			{
+				m_body[i].SetSprite(m_sprites[11]);
+			}
+		}
 	}
 }
 
