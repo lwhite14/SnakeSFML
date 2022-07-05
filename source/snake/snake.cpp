@@ -70,6 +70,12 @@ Snake::Snake(int posX, int posY)
 	m_sprites[13].setTexture(m_textures[13]);
 	m_sprites[13].setScale(Vector2f(0.3125f, 0.3125f));
 
+	eatBuffer.loadFromFile("media/sfx/powerup.wav");
+	eatSound.setBuffer(eatBuffer);
+
+	dieBuffer.loadFromFile("media/sfx/deathscream.wav");
+	dieSound.setBuffer(dieBuffer);
+
 	m_head = SnakePart(Vector2f(posX, posY), m_sprites[0], nullptr, new Direction{ true, false, false, false });
 	m_body = vector<SnakePart>
 	{
@@ -164,6 +170,16 @@ bool Snake::EatenTail()
 	}
 
 	return output;
+}
+
+void Snake::EatSound() 
+{
+	eatSound.play();
+}
+
+void Snake::DieSound() 
+{
+	dieSound.play();
 }
 
 void Snake::Move() 
@@ -362,4 +378,9 @@ vector<Vector2f> Snake::GetBodyPosition()
 void Snake::SetIsDead(bool isDead) 
 {
 	m_isDead = isDead;
+}
+
+bool Snake::GetIsDead() 
+{
+	return m_isDead;
 }

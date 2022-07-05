@@ -10,10 +10,10 @@ The documentation advises you to build from source if you have a newer version o
 however, I used the binaries for Visual Studio 2017 when using VS 2022. <br>
 Extract the binaries to your preffered location, I moved the entire include and lib folders to a dependency
 folder at the root of the project. Then, link to these folders in the 'Additional Include Directories' and 
-'Additional Library Directories'. <br> 
-Then, in 'Linker/Input', add 'sfml-graphics.lib', 'sfml-window.lib', 'sfml-system.lib' to 
+'Additional Library Directories' options in the project settings. <br> 
+Then, in 'Linker/Input', add 'sfml-graphics.lib', 'sfml-window.lib', 'sfml-system.lib', and 'sfml-audio.lib' to 
 'Additional Dependencies' in the Release configuration, and add 'sfml-graphics-d.lib', 'sfml-window-d.lib', 
-'sfml-system-d.lib' in the Debug configuration. <br>
+'sfml-system-d.lib', and 'sfml-audio-d.lib' in the Debug configuration. <br>
 Finally, you will then need to add all the .dll files from the bin directory in your downloaded binaries
 folder, to the root of the project. <br>
 You can now debug the game! If you want to build the project, you will need to copy the .dll files that 

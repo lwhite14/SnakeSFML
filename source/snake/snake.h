@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <vector>
 #include "direction.h"
 #include "snake_part.h"
@@ -20,6 +21,12 @@ private:
 
 	vector<Texture> m_textures;
 	vector<Sprite> m_sprites;
+
+	SoundBuffer eatBuffer;
+	Sound eatSound;
+
+	SoundBuffer dieBuffer;
+	Sound dieSound;
 
 	SnakePart m_head;
 	vector<SnakePart> m_body;
@@ -42,8 +49,12 @@ public:
 	bool OffScreen();
 	bool EatenTail();
 
+	void EatSound();
+	void DieSound();
+
 	Vector2f GetHeadPosition();
 	vector<Vector2f> GetBodyPosition();
 
 	void SetIsDead(bool isDead);
+	bool GetIsDead();
 };

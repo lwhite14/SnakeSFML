@@ -25,12 +25,16 @@ void BasicScene::Update(const Time& deltaTime)
 		grub->NewPosition(tempVector);
 		snake->AddBody();
 		snake->IncreaseSpeed();
+		snake->EatSound();
 		gameUI->IncreaseScore();
 	}
 
 	if (snake->OffScreen() || snake->EatenTail())
 	{
-		GameOver();
+		if (!snake->GetIsDead()) 
+		{
+			GameOver();
+		}
 	}
 }
 
@@ -65,6 +69,7 @@ void BasicScene::Input()
 
 void BasicScene::GameOver() 
 {
+	snake->DieSound();
 	snake->SetIsDead(true);
 	gameUI->SetGameOver(true);
 }
